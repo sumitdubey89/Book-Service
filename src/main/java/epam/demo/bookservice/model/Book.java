@@ -1,8 +1,11 @@
 package epam.demo.bookservice.model;
 
 import javax.persistence.*;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 
 
+@ApiModel(description = "Details of the book")
 @Entity
 @Table(name = "book")
 public class Book {
@@ -14,29 +17,30 @@ public class Book {
 			initialValue = 100)
 	@GeneratedValue(strategy = GenerationType.SEQUENCE,generator ="book_id_sequence")*/
 	@Column(name = "id",nullable = false)
+	@ApiModelProperty(notes = "Its same as Book Id, must be unique")
 	private Integer id;
 
+	@ApiModelProperty(notes = "Name of the Book Title")
 	@Column(name = "book_name",nullable = false)
 	private String name;
 
+	@ApiModelProperty(notes = "Who wrote / authored the book")
 	@Column(name = "author_name",nullable = false)
 	private String author;
 
+	@ApiModelProperty(notes = "Genre of the book basically")
 	@Column(name = "book_category",nullable = false)
 	private String category;
 
+	@ApiModelProperty(notes = "Small Description of the book")
 	@Column(name = "book_description",nullable = false)
 	private String description;
 
-	public Book() {
-	}
+	@ApiModelProperty(notes = "Retail Price of the Book")
+	@Column(name="book_price",nullable = false)
+	private Integer price;
 
-	public Book(Integer id, String name, String author, String category, String description) {
-		this.id = id;
-		this.name = name;
-		this.author = author;
-		this.category = category;
-		this.description = description;
+	public Book() {
 	}
 
 	public Integer getId() {
@@ -79,8 +83,25 @@ public class Book {
 		this.description = description;
 	}
 
+	public Integer getPrice() {
+		return price;
+	}
+
+	public void setPrice(Integer price) {
+		this.price = price;
+	}
+
+	public Book(Integer id, String name, String author, String category, String description, Integer price) {
+		this.id = id;
+		this.name = name;
+		this.author = author;
+		this.category = category;
+		this.description = description;
+		this.price = price;
+	}
+
 	@Override public String toString() {
-		return "Book{" + "name='" + name + '\'' + ", author='" + author + '\'' + ", Category='" + category + '\''
-				+ ", Description='" + description + '\'' + '}';
+		return "Book{" + "name='" + name + '\'' + ", author='" + author + '\'' + ", category='" + category + '\''
+				+ ", description='" + description + '\'' + ", price=" + price + '}';
 	}
 }
