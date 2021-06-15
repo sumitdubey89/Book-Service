@@ -18,7 +18,19 @@ http://localhost:8080/swagger-ui/index.html
 for 2.9.2
 http://localhost:8080/swagger-ui.html
 
+.paths(PathSelectors.any())
+during
+return new Docket(DocumentationType.SWAGGER_2)
+.groupName("Phase2")
+.select()
+.paths(PathSelectors.any())
+//.paths(PathSelectors.ant("/bookService/*"))
+.apis(RequestHandlerSelectors.basePackage("epam.demo"))
+.build()
+.apiInfo(apiMoreinformation());
 
+so that all paths for controller are shown otherwise only one level of methods
+are displayed
 
 
 configure swagger adding details as annotations to API
