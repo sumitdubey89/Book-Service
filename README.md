@@ -50,3 +50,10 @@ with any Bean we can use
 to fetch the refreshed values from config server:-
 1.pom.xml must have spring-boot-starter-actuator dependency
 2.mark beans as @RefeshScope 
+
+writing @EnableEurekaClient along with @springBootApplication is not required.
+Just add the below dependency and you are good to go
+<dependency>
+<groupId>org.springframework.cloud</groupId>
+<artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
+</dependency>
