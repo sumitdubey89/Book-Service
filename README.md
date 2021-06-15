@@ -30,4 +30,23 @@ For adding metadata : we will add .apiInfo() before build of Docket object
 @ApiModel for class description
 @ApimodelProperty
 
-springfox for mre annotations
+springfox for more annotations
+
+things did not work with second line in property file
+so it was removed and .import was used
+spring.config.import=optional:configserver:http://localhost:8888
+#spring.cloud.config.uri=http://localhost:8888
+
+application-<profile>.yml or properties
+
+change profile by adding in application.properties
+spring.profiles.active=test
+
+then application-test.yml or properties will be used
+
+with any Bean we can use
+@Profile("production") or @Profile("dev") to use values for properties from that application-profile.properties 
+
+to fetch the refreshed values from config server:-
+1.pom.xml must have spring-boot-starter-actuator dependency
+2.mark beans as @RefeshScope 

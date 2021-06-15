@@ -7,6 +7,7 @@ import epam.demo.bookservice.repository.BookRepository;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
 
 
@@ -16,6 +17,9 @@ public class BookServiceController {
 
 	@Autowired
 	BookRepository bookRepository;
+
+	@Value("${my.greetings}")
+	private String greetingMessage;
 
 //	@RequestMapping("/{bookId}")
 //	public List<Book> getBook(@PathVariable("bookId") String bookId){
@@ -31,6 +35,8 @@ public class BookServiceController {
 		return bookRepository.findAll();
 	}
 
+
+
 	@GetMapping("/books/{book_ID}")
 	@ApiOperation(value = "fetching data based on Book ID",
 			notes = "This method calls the Table Book in Database and fetch all the entries for a "
@@ -41,6 +47,8 @@ public class BookServiceController {
 
 	}
 
+
+
 	@PostMapping("/books")
 	@ApiOperation(value = "Creating data entry for a Book",
 			notes = "This method calls the Table Book in Database and creates the entry for the book in the "
@@ -48,8 +56,10 @@ public class BookServiceController {
 			response = Book.class)
 	public String saveEntry(@RequestBody final Book book){
 		 bookRepository.save(book);
-		return ("Entry for the book is saved as :"+book.toString());
+		return (greetingMessage+"!! Entry for the book is saved as :"+book.toString());
 	}
+
+
 
 	@DeleteMapping("/books/{book_ID}")
 	@ApiOperation(value = "Deleting entry of book based on Book ID",
@@ -60,6 +70,8 @@ public class BookServiceController {
 		bookRepository.deleteById(bookID);
 		return ("Entry for the book ID: "+bookID +" has been deleted ");
 	}
+
+
 
 	@PutMapping("/books/{book_ID}")
 	@ApiOperation(value = "Edit Book info",
@@ -73,4 +85,6 @@ public class BookServiceController {
 		}
 		return "Mismatch in path and Msg Book ID";
 	}
+
+
 }
